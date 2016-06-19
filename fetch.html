@@ -1,0 +1,31 @@
+<form action='' id='form'>
+	<input type="text" name="username" value="zhang"/>
+	<input type="password" name="password" value="123456"/>
+</form>
+<script type="text/javascript">
+	window.fetch('./v.php?action=test',{
+		method:'post', //请求方法
+		body:new FormData(document.getElementById('form')),
+		//body:'name=zhang',
+		headers:{		//设置请求头信息
+			Accept:'application/json',
+    		'Content-Type':'application/json',
+    		//'content-length':10,
+		}
+	}).then(function(response){
+
+		//获取响应头信息
+		console.log(response.status)
+		console.log(response.headers.get('Content-Type'));
+		console.log(response.headers.get('date'));
+
+		//接收字符串数据
+		return response.text()
+		//接收json数据
+		//return response.json()
+	}).then(function(text){
+		alert(text)
+	}).catch(function(error){
+		alert(error)
+	});
+</script>
